@@ -68,11 +68,6 @@ class AutoGrader:
         self.grade = test_cases_pass/test_cases_count * 100
         return test_cases_pass, error, test_results
 
-    def run_tests(self):
-        print("\nRunning tests:")
-        for i, (test_input, expected_output) in enumerate(self.test_cases.items()):
-            print(f"Test {i+1}: Input - {test_input}, Expected Output - {expected_output}")
-
     def get_grade(self):
         return self.grade
     
