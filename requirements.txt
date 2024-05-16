@@ -1,5 +1,4 @@
 pytz
-pymongo
 python-dotenv
 boto3
 Flask
