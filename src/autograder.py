@@ -10,10 +10,6 @@ class AutoGrader:
         self.test_cases, self.funcName = parse_test_cases(test_case_file)
         self.grade = 0
 
-    def present_problem(self):
-        print("Problem Statement:")
-        print(self.problem)
-
     def grade_solution(self, student_solution):
         error = None
         test_cases_pass = 0
@@ -35,7 +31,8 @@ class AutoGrader:
                     break
 
             if solution_function is None:
-                return "The 'solution' function is not defined or not callable."
+                error = "The 'solution' function is not defined or not callable."
+                return test_cases_pass, error, test_results
 
             test_results.append(f"Testing {self.funcName}...")
             test_results.append("> building source...")
