@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Grader - Submission Result</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/custom.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your solution has been graded</h1>
+        {% if passCount %}
+            <p class="pass">Test cases passed: {{ passCount }}/{{ total }}</p>
+            {% if passCount != total %}
+                <p class="fail">Test cases failed: {{ total-passCount }}/{{ total }}</p>
+            {% endif %}
+        {% endif %}
+        {% if error_message is not none %}
+            <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+        <p class="grade">Grade: {{ grade }}%</p>
+    </div>
+</body>
+</html>

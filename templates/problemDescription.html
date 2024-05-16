@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Auto Grader</title>
+    <style>
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .left-column {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 500px;
+            flex: 1;
+        }
+        .left-column pre {
+            font-family: Arial, sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin: 0;
+            max-height: 400px;
+            padding: 0;
+        }
+        .right-column {
+            font-family: Arial, sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex: 1;
+            padding-left: 20px;
+            border-left: 1px solid #ccc;
+        } 
+
+        .right-column form {
+            margin-top: 20px;
+        }
+
+        .right-column label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .right-column .file-label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .right-column textarea,
+        .right-column input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        h1, p {
+            margin-top: 0;
+        }
+        h2 {
+
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        textarea, input[type="file"] {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submission-grade {
+            flex: 1;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .submission-grade h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .submission-grade p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .submission-grade .passCount {
+            color: green;
+            justify-content: left;
+        }
+
+        .submission-grade .test-results {
+            color: black;
+
+        }
+
+        .submission-grade .error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .submission-grade .grade {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(53, 53, 161);
+        }
+
+    </style>
+    <script>
+        function handleTab(e) {
+            if (e.keyCode === 9) {
+                e.preventDefault();
+                var textarea = e.target;
+                var start = textarea.selectionStart;
+                var end = textarea.selectionEnd;
+                textarea.value = textarea.value.substring(0, start) + '\t' + textarea.value.substring(end);
+                textarea.selectionStart = textarea.selectionEnd = start + 1;
+            }
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
+            fetch('/problem', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Sakshi")
+                console.log(data)
+                console.log(document)
+                    // Update error_message
+                    var errorMessageElement = document.querySelector('.error-message');
+                    if (errorMessageElement) {
+                        errorMessageElement.innerText = data.error_message == null ? '' : 'Error: ' + data.error_message;
+                    }
+
+                    
+                    var testResultsElement = document.querySelector('.test-results');
+                    if (testResultsElement) {
+                        testResultsElement.textContent = ''
+                        if (data.test_results && data.test_results.length > 0) {
+                            var ul = document.createElement('ul');
+                            data.test_results.forEach(function(result) {
+                                var li = document.createElement('li');
+                                li.textContent = result;
+                                ul.appendChild(li);
+                            });
+                            testResultsElement.appendChild(ul);
+                        }
+                    }
+
+                    // Update passCount if there is no error message
+                    var passCountElement = document.querySelector('.passCount');
+                    if (passCountElement) {
+                        passCountElement.innerText = ''; // Clear pass count initially
+                        if (!data.error_message) {
+                            passCountElement.innerText = 'Test cases passed: ' + data.passCount + '/' + data.total;
+                        }
+                    }
+
+                    var gradeElement = document.querySelector('.grade');
+                    if (gradeElement) {
+                        gradeElement.innerText = 'Grade: ' + data.grade + '%';
+                    }
+
+                document.getElementById('submission-grade').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function logout() {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/logout';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="left-column">
+                <h2>{{ problem_name }}</h2>
+                <pre>{{ problem }}
+                {% if problem_name == 'Knight Attack' %}
+                    <img src="static/chessboard.png" alt="Chess Board" width="200" height="200">
+                {% endif %}
+                <pre>{{ test_cases }}</pre>
+    
+            </div>
+            <div class="right-column">
+                <h2>Submit Solution</h2>
+                <form action = "/problem" method="post" enctype="multipart/form-data" onsubmit="submitForm(event)">
+                    <label for="solution">Enter your solution:</label>
+                    <textarea id="solution" name="solution" rows="10" cols="50" onkeydown="handleTab(event)">{{solution}}</textarea>
+                    <label class="file-label" for="file">Or upload .py File</label>
+                    <input type="file" id="file" name="file">
+                    <button type="submit" id="Submit">Submit</button>
+                    <button type="logout" id="Logout" onclick="logout()">Logout</button>
+                </form>
+            </div>
+        </div>
+    
+    
+        <div class="submission-grade" id="submission-grade" style="display: none;">
+            <h1>Submission Result</h1>
+            <pre class="test-results"></pre>
+            <p class="error-message"></p>
+            <p class="passCount"></p>
+            <p class="grade"></p>
+        </div>
+    </div>
+</body>
+</html>

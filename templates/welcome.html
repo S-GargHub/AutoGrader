@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autograder Login</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+        <img src="static/logo.jpeg" alt="Autograder logo" class="logo">
+        <div class="header-content">
+          <h1>Welcome to Autograder!</h1>
+        </div>
+      </header>
+    <main>
+      <p>Autograder is a system that benefits both students and graders by automating student queue and assignment grading.</p>
+      <form id="loginForm" action="/login" method="post">
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your SJSU email">
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        <button type="submit" id="loginBtn">Login</button>
+        <a href="#">Forgot Password?</a>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
