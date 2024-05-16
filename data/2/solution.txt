@@ -1,0 +1,1 @@
+def knight_attack(n, kr, kc, pr, pc):

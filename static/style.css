@@ -1,0 +1,80 @@
+.container {
+    width: 400px; /* Set the width of the main container */
+    margin: 50px auto; /* Center the container horizontally */
+    padding: 30px; /* Add padding for spacing */
+    border: 1px solid #ddd; /* Add a light border */
+    border-radius: 5px; /* Add rounded corners */
+  }
+  
+  header {
+    text-align: center; /* Center header content */
+    margin-bottom: 30px; /* Add space after header */
+    background-color: rgb(118, 163, 120); /* Set button background color */
+  }
+  
+  h1 {
+    color: #333; /* Set the text color for headings */
+  }
+  
+  p {
+    color: #666; /* Set the text color for paragraphs */
+    line-height: 1.5; /* Increase line spacing for readability */
+  }
+  
+  main {
+    margin-bottom: 30px; /* Add space before footer */
+  }
+  
+  form {
+    display: flex; /* Arrange form elements horizontally */
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 10px; /* Add space between form elements */
+  }
+  
+  label {
+    margin-bottom: 5px; /* Add space below labels */
+    display: block; /* Display labels on their own line */
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px; /* Add padding to input fields */
+    border: 1px solid #ccc; /* Add border to input fields */
+    border-radius: 3px; /* Add rounded corners */
+    width: 100%; /* Make input fields full width */
+  }
+  
+  button {
+    background-color: #4CAF50; /* Set button background color */
+    color: white; /* Set button text color */
+    padding: 10px 15px; /* Add padding to button */
+    border: none; /* Remove default button border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to indicate clickability */
+  }
+  
+  a {
+    color: blue; /* Set link color */
+    text-decoration: none; /* Remove underline from links */
+  }
+
+
+  body {
+    font-family: Arial, sans-serif; /* Set the font family */
+    margin: 0; /* Remove default margin */
+  }
+  
+  h1 {
+    text-align: center; /* Center align headings */
+    font-size: 2em; /* Increase heading size */
+  }
+  
+  .logo {
+    height: 80px; /* Adjust the height as needed */
+  }
+
+  .error {
+    color: red;
+  }
+  
+  

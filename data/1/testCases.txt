@@ -1,0 +1,13 @@
+Function Name: add
+
+Test Case 1:
+Input: 2, 3
+Output: 5
+
+Test Case 2:
+Input: 10, -5
+Output: 5
+
+Test Case 3:
+Input: 0, 0
+Output: 0
