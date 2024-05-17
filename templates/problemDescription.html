@@ -152,10 +152,6 @@
         function submitForm(event) {
             event.preventDefault();
             var formData = new FormData(event.target);
-            
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
 
             fetch('/problem', {
                 method: 'POST',
@@ -163,9 +159,6 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Sakshi")
-                console.log(data)
-                console.log(document)
                     // Update error_message
                     var errorMessageElement = document.querySelector('.error-message');
                     if (errorMessageElement) {
