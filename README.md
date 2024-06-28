@@ -6,11 +6,10 @@ Developed an intelligent Auto Grader platform featuring secure user authenticati
 Choice of Frameworks and Tools:
 
 ## FrontEnd:
-● Flask: Lightweight and well-suited for building simple web applications with user
-interfaces. It's easy to use, making it a good choice for this project.
-● HTML/CSS: Easy to generate templates for user interface.
+* **Flask**: Lightweight and well-suited for building simple web applications with user interfaces. It's easy to use, making it a good choice for this project.
+* **HTML/CSS**: Easy to generate templates for user interface.
 
 ## BackEnd:
-● Boto3: Python library for interacting with AWS services. Used for Cognito and DynamoDB interaction.
-● AWS Cognito: Manages user authentication and authorization for secure access.
-● AWS DynamoDB: Store student grades
+* **Boto3**: Python library for interacting with AWS services. Used for Cognito and DynamoDB interaction.
+* **AWS Cognito**: Manages user authentication and authorization for secure access.
+* **AWS DynamoDB**: Store student grades
