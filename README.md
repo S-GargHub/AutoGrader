@@ -1,7 +1,7 @@
 # AutoGrader System
 
 
-Developed an intelligent Auto Grader platform featuring secure user authentication, which autonomously evaluates students' programming submissions against comprehensive predefined test cases. This innovative system streamlines the assessment process, ensuring consistent and objective grading of coding assignments while maintaining data integrity through robust login functionality.
+Developed an intelligent Auto Grader platform  using Docker containerization featuring secure user authentication, which autonomously evaluates students' programming submissions against comprehensive predefined test cases. This innovative system streamlines the assessment process, ensuring consistent and objective grading of coding assignments while maintaining data integrity through robust login functionality. The Docker-based architecture facilitates easy scaling, efficient resource utilization, and simplified deployment, enhancing overall system reliability and portability.
 
 Choice of Frameworks and Tools:
 
